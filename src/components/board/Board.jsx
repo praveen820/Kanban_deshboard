@@ -21,7 +21,7 @@ import ViewTaskModal from "../modal/taskModal/ViewTaskModal";
 const Board = () => {
   const dispatch = useDispatch();
   const boards = useSelector((state) => state.boards.boards);
-  const activeBoard = boards?.find((board) => board?.active === true);
+  const activeBoard = Array.isArray(boards) && boards?.find((board) => board?.active === true);
 
   // Modals
   const deleteBoardModal = useSelector((state) => state.modal.deleteBoardModal);

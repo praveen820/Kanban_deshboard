@@ -14,7 +14,7 @@ import { randomHexColor } from "../../../features/boards/boarderHelper";
 const EditBoardModal = () => {
   const dispatch = useDispatch();
   const activeBoard = useSelector((state) =>
-    state?.boards?.boards?.find((board) => board?.active === true)
+    Array.isArray(state?.boards?.boards) && state?.boards?.boards?.find((board) => board?.active === true)
   );
   const [boardName, setBoardName] = useState(activeBoard?.name);
   const [columns, setColumns] = useState(activeBoard?.columns);

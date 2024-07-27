@@ -25,7 +25,7 @@ const AddTaskModal = () => {
   const [errorSubtaskIndex, setErrorSubtaskIndex] = useState([]);
   const boards = useSelector((state) => state?.boards?.boards);
   const activeBoard = useSelector((state) =>
-    boards?.find((board) => board?.active)
+    Array.isArray(boards) && boards?.find((board) => board?.active)
   );
   const activeBoardColumns = activeBoard?.columns;
 

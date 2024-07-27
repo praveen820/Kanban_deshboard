@@ -8,7 +8,6 @@ import {
 } from "../../../features/boards/boardSlice";
 import { closeAllModals } from "../../../features/global/modalSlice";
 import { motion } from "framer-motion";
-// import { newspaper } from "../../../utils/framer-animations";
 import { newspaper } from "../../../utils/framer-animations";
 import { useNavigate } from "react-router-dom";
 import Backdrop from "../backDrop/BackDrop";
@@ -16,7 +15,7 @@ const ActionBoardModal = ({ action }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const activeBoard = useSelector((state) =>
-    state.boards.boards.find((board) => board.active === true)
+    Array.isArray(state?.boards?.boards) && state?.boards?.boards?.find((board) => board.active === true)
   );
 
   const deleteTaskModal = useSelector((state) => state.modal.deleteTaskModal);

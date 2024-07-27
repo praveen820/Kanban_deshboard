@@ -5,10 +5,10 @@ import { toggleSubTask } from "../../features/boards/boardSlice";
 const Subtask = ({ subtaskID, columnID, boardID, taskID }) => {
   const dispatch = useDispatch();
   const boards = useSelector((state) => state?.boards);
-  const board = boards?.boards?.find((board) => board?.id === boardID);
-  const column = board?.columns?.find((column) => column?.id === columnID);
-  const task = column?.tasks?.find((task) => task?.id === taskID);
-  const subtask = task?.subTasks?.find((subtask) => subtask?.id === subtaskID);
+  const board = Array.isArray(boards?.boards) && boards?.boards?.find((board) => board?.id === boardID);
+  const column = Array.isArray(board?.columns) && board?.columns?.find((column) => column?.id === columnID);
+  const task = Array.isArray(column?.tasks) && column?.tasks?.find((task) => task?.id === taskID);
+  const subtask = Array.isArray(task?.subTasks) && task?.subTasks?.find((subtask) => subtask?.id === subtaskID);
 
   const toggleSubTaskHandler = () => {
     dispatch(

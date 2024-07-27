@@ -18,13 +18,13 @@ const EditTaskModal = () => {
   const editTaskModal = useSelector((state) => state.modal.editTaskModal);
   const task = editTaskModal.task;
   const activeBoard = useSelector((state) =>
-    state?.boards?.boards?.find((board) => board.active === true)
+    Array.isArray(state?.boards?.boards) && state?.boards?.boards?.find((board) => board.active === true)
   );
   const column = activeBoard?.columns?.find(
-    (column) => column.id === task.columnID
+    (column) => column?.id === task?.columnID
   );
   const [taskName, setTaskName] = useState(task?.name);
-  const [taskDescription, setTaskDescription] = useState(task.description);
+  const [taskDescription, setTaskDescription] = useState(task?.description);
   const [subtasks, setSubtasks] = useState(task?.subTasks);
   const [columnID, setColumnID] = useState(task?.columnID);
   const [columnName, setColumnName] = useState(column?.name);

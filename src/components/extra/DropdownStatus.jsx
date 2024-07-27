@@ -9,8 +9,8 @@ const DropdownStatus = ({ task }) => {
   const [openDropDown, setOpenDropDown] = useState(false);
   const dispatch = useDispatch();
   const boards = useSelector((state) => state.boards.boards);
-  const board = boards.find((board) => board.id === task.boardID);
-  const column = board?.columns.find((column) => column.id === task?.columnID);
+  const board = Array.isArray(boards) && boards?.find((board) => board.id === task.boardID);
+  const column = Array.isArray(board?.columns) && board?.columns.find((column) => column.id === task?.columnID);
 
   // Refs
   const wrapperRef = useRef(null);
