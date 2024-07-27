@@ -3,7 +3,7 @@ import React from "react";
 
 import Task from "../task/Task";
 
-import { Droppable } from "react-beautiful-dnd";
+import { Droppable } from "@hello-pangea/dnd";
 
 const Column = ({ column = {}, boardID = "", colIndex = 0 }) => {
   return (

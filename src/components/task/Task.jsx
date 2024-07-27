@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 
 import { openViewTaskModal } from "../../features/global/modalSlice";
 
-import { Draggable } from "react-beautiful-dnd";
+import { Draggable } from "@hello-pangea/dnd";
 
 const Task = ({ boardID, columnID, task, index }) => {
   const dispatch = useDispatch();

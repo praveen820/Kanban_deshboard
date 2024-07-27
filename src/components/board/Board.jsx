@@ -15,7 +15,7 @@ import AddTaskModal from "../modal/taskModal/AddTaskModal";
 import AddBoardModal from "../modal/boardModal/AddBoardModal";
 import EditBoardModal from "../modal/boardModal/EditBoardModal";
 import EditTaskModal from "../modal/taskModal/EditTaskModal";
-import { DragDropContext } from "react-beautiful-dnd";
+import { DragDropContext } from "@hello-pangea/dnd";
 import ViewTaskModal from "../modal/taskModal/ViewTaskModal";
 
 const Board = () => {

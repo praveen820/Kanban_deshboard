@@ -18,7 +18,7 @@ import { ReactComponent as Sun } from "../../assets/icons/icon-light-theme.svg";
 import { ReactComponent as Moon } from "../../assets/icons/icon-dark-theme.svg";
 import { ReactComponent as BoardIcon } from "../../assets/icons/icon-board.svg";
 
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import sidebarSlice, {
   openSidebar,
   closeSidebar,
