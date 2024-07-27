@@ -12,7 +12,6 @@ import { dropIn } from "../../../utils/framer-animations";
 import { ReactComponent as BoardIcon } from "../../../assets/icons/icon-board.svg";
 import { ReactComponent as Sun } from "../../../assets/icons/icon-light-theme.svg";
 import { ReactComponent as Moon } from "../../../assets/icons/icon-dark-theme.svg";
-import { NavLink } from "react-router-dom";
 import Backdrop from "../backDrop/BackDrop";
 
 const HeaderModal = ({ handleClose }) => {

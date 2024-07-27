@@ -1,4 +1,4 @@
-import { createSlice, nanoid, current } from "@reduxjs/toolkit";
+import { createSlice, nanoid } from "@reduxjs/toolkit";
 import boards from "../../app/app.json";
 import { randomHexColor } from "./boarderHelper";
 
@@ -143,7 +143,7 @@ export const boardsSlice = createSlice({
       const board = state?.boards?.find((b) => b.id === boardID);
       const oldColumn = board?.columns?.find((c) => c.id === oldColumnID);
       const newColumn = board?.columns?.find((c) => c.id === columnID);
-      const stateTask = oldColumn?.tasks?.find((t) => t.id === task.id);
+      // const stateTask = oldColumn?.tasks?.find((t) => t.id === task.id);
 
       let newSubTasks = [];
       let newTask = [];
@@ -195,7 +195,7 @@ export const boardsSlice = createSlice({
       const task = sourceColumn.tasks[source.index];
       sourceColumn.tasks?.splice(source.index, 1);
       destinationColumn.tasks?.splice(destination.index, 0, task);
-      const intDestId = parseInt(destination.droppableId);
+      // const intDestId = parseInt(destination.droppableId);
       task.columnID = destinationColumn.id;
       // Iterate through subtasks and change the columnID
       task.subTasks?.forEach((s) => (s.columnID = destinationColumn.id));
