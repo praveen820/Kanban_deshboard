@@ -18,7 +18,7 @@ export const boardsSlice = createSlice({
       const newID = nanoid();
       const { boardName } = action.payload;
       const { columnNames } = action.payload;
-      const columns = columnNames?.map((name) => {
+      const columns = Array.isArray(columnNames) && columnNames?.map((name) => {
         return {
           id: nanoid(),
           boardID: newID,
@@ -37,13 +37,13 @@ export const boardsSlice = createSlice({
     dragAndDropBoard: (state, action) => {
       const { source, destination } = action.payload;
       const board = state.boards[source.index];
-      state?.boards.splice(source.index, 1);
-      state?.boards.splice(destination.index, 0, board);
+      Array.isArray(state?.boards) && state?.boards?.splice(source.index, 1);
+      Array.isArray(state?.boards) && state?.boards?.splice(destination.index, 0, board);
     },
 
     deleteBoard: (state, action) => {
       const boardID = action?.payload;
-      state.boards = state?.boards?.filter((board) => board.id !== boardID);
+      state.boards = Array.isArray(state?.boards) && state?.boards?.filter((board) => board.id !== boardID);
       // Set active board to the first board in the array
       state.boards[0].active = true;
     },
@@ -64,7 +64,7 @@ export const boardsSlice = createSlice({
     },
     setActiveBoard: (state, action) => {
       // First remove active from all boards
-      state?.boards?.forEach((board) => {
+      Array.isArray(state?.boards) && state?.boards?.forEach((board) => {
         board.active = false;
       });
       const board = Array.isArray(state?.boards) && state?.boards?.find((board) => board.id === action.payload);
@@ -99,7 +99,7 @@ export const boardsSlice = createSlice({
       const board = Array.isArray(state?.boards) && state?.boards?.find((b) => b.id === boardID);
       const column = Array.isArray(board?.columns) && board?.columns?.find((c) => c.id === columnID);
       const newTaskID = nanoid();
-      const newSubtasks = subTaskNames?.map((name) => {
+      const newSubtasks = Array.isArray(subTaskNames) && subTaskNames?.map((name) => {
         return {
           id: nanoid(),
           taskID: newTaskID,
@@ -128,7 +128,7 @@ export const boardsSlice = createSlice({
       const column = Array.isArray(board?.columns) && board?.columns?.find((c) => c.id === task.columnID);
 
       // Remove the task from the column
-      column.tasks = column?.tasks?.filter((t) => t.id !== task.id);
+      column.tasks = Array.isArray(column?.tasks) && column?.tasks?.filter((t) => t.id !== task.id);
     },
     editTask: (state, action) => {
       const {
@@ -157,7 +157,7 @@ export const boardsSlice = createSlice({
           subTasks: subTasks,
         };
         // Replace the task in the column
-        oldColumn.tasks = oldColumn?.tasks?.map((t) => {
+        oldColumn.tasks = Array.isArray(oldColumn?.tasks) && oldColumn?.tasks?.map((t) => {
           if (t.id === task.id) {
             return newTask;
           } else {
@@ -165,7 +165,7 @@ export const boardsSlice = createSlice({
           }
         });
       } else {
-        newSubTasks = subTasks?.map((subTask) => {
+        newSubTasks = Array.isArray(subTasks) && subTasks?.map((subTask) => {
           return {
             ...subTask,
             columnID: newColumn.id,
@@ -181,7 +181,7 @@ export const boardsSlice = createSlice({
         };
 
         // Remove the task from the old column
-        oldColumn.tasks = oldColumn?.tasks?.filter((t) => t.id !== task.id);
+        oldColumn.tasks = Array.isArray(oldColumn?.tasks) && oldColumn?.tasks?.filter((t) => t.id !== task.id);
         // Add the task to the new column
         newColumn?.tasks?.push(newTask);
       }
@@ -193,12 +193,12 @@ export const boardsSlice = createSlice({
       const sourceColumn = activeBoard?.columns[source.droppableId];
       const destinationColumn = activeBoard?.columns[destination.droppableId];
       const task = sourceColumn.tasks[source.index];
-      sourceColumn.tasks?.splice(source.index, 1);
-      destinationColumn.tasks?.splice(destination.index, 0, task);
+      Array.isArray(sourceColumn?.tasks) && sourceColumn?.tasks?.splice(source.index, 1);
+      Array.isArray(destinationColumn?.tasks) && destinationColumn?.tasks?.splice(destination.index, 0, task);
       // const intDestId = parseInt(destination.droppableId);
       task.columnID = destinationColumn.id;
       // Iterate through subtasks and change the columnID
-      task.subTasks?.forEach((s) => (s.columnID = destinationColumn.id));
+     Array.isArray( task.subTasks) &&  task.subTasks?.forEach((s) => (s.columnID = destinationColumn.id));
     },
     changeTaskColumn: (state, action) => {
       const { boardID, oldColumnID, newColumnID, taskID } = action.payload;
@@ -206,10 +206,10 @@ export const boardsSlice = createSlice({
       const oldColumn = Array.isArray(board?.columns) && board?.columns?.find((c) => c.id === oldColumnID);
       const newColumn = Array.isArray(board?.columns) && board?.columns?.find((c) => c.id === newColumnID);
       const task = Array.isArray(oldColumn?.tasks) && oldColumn?.tasks?.find((t) => t.id === taskID);
-      oldColumn.tasks = oldColumn?.tasks?.filter((t) => t.id !== taskID);
+      oldColumn.tasks = Array.isArray(oldColumn?.tasks) && oldColumn?.tasks?.filter((t) => t.id !== taskID);
       task.columnID = newColumnID;
       // Iterate through subtasks and change the columnID
-      task.subTasks?.forEach((s) => (s.columnID = newColumnID));
+     Array.isArray( task.subTasks) &&  task.subTasks?.forEach((s) => (s.columnID = newColumnID));
       newColumn.tasks?.push(task);
     },
 
@@ -245,10 +245,10 @@ export const boardsSlice = createSlice({
 });
 
 export const finishedSubTasksOfTask = (state, boardID, columnID, taskID) => {
-  const board = state?.boards?.boards?.find((b) => b.id === boardID);
+  const board = Array.isArray(state?.boards?.boards) && state?.boards?.boards?.find((b) => b.id === boardID);
   const column = Array.isArray(board?.columns) && board?.columns?.find((c) => c.id === columnID);
   const task = Array.isArray(column?.tasks) && column?.tasks?.find((t) => t.id === taskID);
-  return task?.subTasks?.filter((s) => s.isDone).length;
+  return Array.isArray(task?.subTasks) && task?.subTasks?.filter((s) => s.isDone).length;
 };
 
 export const findActiveBoard = (state) => {

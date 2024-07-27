@@ -123,7 +123,7 @@ const AddTaskModal = () => {
           <div className="modal__subtasks-container">
             <h3 className="modal-label">Subtasks</h3>
             <div className="modal__subtasks">
-              {subtasks?.map((subtask, index) => (
+              {Array.isArray(subtasks) && subtasks?.map((subtask, index) => (
                 <div className="modal__subtask" key={index}>
                   <input
                     type="text"
@@ -138,7 +138,7 @@ const AddTaskModal = () => {
                       setSubtasks(newSubtasks);
                       if (errorSubtaskIndex.includes(index)) {
                         setErrorSubtaskIndex(
-                          errorSubtaskIndex.filter(
+                          Array.isArray(errorSubtaskIndex) && errorSubtaskIndex?.filter(
                             (errorIndex) => errorIndex !== index
                           )
                         );
@@ -151,7 +151,7 @@ const AddTaskModal = () => {
                       e.preventDefault();
 
                       const newSubtasks = [...subtasks];
-                      newSubtasks.splice(index, 1);
+                      Array.isArray(newSubtasks) && newSubtasks?.splice(index, 1);
                       setSubtasks(newSubtasks);
                     }}
                   >
@@ -201,7 +201,7 @@ const AddTaskModal = () => {
               </div>
               {openDropdown && (
                 <div className="dropdown__options">
-                  {activeBoardColumns?.map((col, index) => (
+                  {Array.isArray(activeBoardColumns) && activeBoardColumns?.map((col, index) => (
                     <div
                       key={index}
                       className={`dropdown__option ${

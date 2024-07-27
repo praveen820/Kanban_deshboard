@@ -49,7 +49,7 @@ const EditTaskModal = () => {
   const handleChangeSubtask = (e, index) => {
     e.preventDefault();
     let newSubtasks = [];
-    subtasks.forEach((sub, i) => {
+    Array.isArray(subtasks) && subtasks?.forEach((sub, i) => {
       if (i === index) {
         newSubtasks.push({ ...sub, name: e.target.value });
       } else {
@@ -60,14 +60,14 @@ const EditTaskModal = () => {
     if (e.target.value === "") {
       setErrorSubtaskIndex([...errorSubtaskIndex, index]);
     } else {
-      setErrorSubtaskIndex(errorSubtaskIndex.filter((i) => i !== index));
+      setErrorSubtaskIndex(Array.isArray(errorSubtaskIndex) && errorSubtaskIndex?.filter((i) => i !== index));
     }
   };
 
   const handleDeleteSubtask = (e, index) => {
     e.preventDefault();
 
-    const newSubtasks = subtasks.filter((subtask, i) => i !== index);
+    const newSubtasks = Array.isArray(subtasks) && subtasks?.filter((subtask, i) => i !== index);
     setSubtasks(newSubtasks);
   };
   const handleSubmit = (e) => {
@@ -93,7 +93,7 @@ const EditTaskModal = () => {
     }
 
     let newErrorSubtaskIndex = [];
-    subtasks.forEach((subtask, i) => {
+    Array.isArray(subtasks) && subtasks?.forEach((subtask, i) => {
       if (subtask?.name === "") {
         newErrorSubtaskIndex.push(i);
         error = true;
@@ -165,7 +165,7 @@ const EditTaskModal = () => {
           <div className="modal__subtasks-container">
             <h3>Subtasks</h3>
             <div className="modal__subtasks">
-              {subtasks?.map((subtask, index) => (
+              {Array.isArray(subtasks) && subtasks?.map((subtask, index) => (
                 <div className="modal__subtask" key={index}>
                   <input
                     type="text"
@@ -217,7 +217,7 @@ const EditTaskModal = () => {
               </div>
               {openDropdown && (
                 <div className="dropdown__options">
-                  {activeBoard?.columns?.map((col, index) => (
+                  {Array.isArray(activeBoard?.columns) && activeBoard?.columns?.map((col, index) => (
                     <div
                       key={index}
                       className={`dropdown__option ${

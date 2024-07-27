@@ -47,7 +47,7 @@ const Board = () => {
             <>
               <>
                 <DragDropContext onDragEnd={handleOnDragEnd}>
-                  {activeBoard?.columns?.map((column, colIndex) => (
+                  {Array.isArray(activeBoard?.columns) && activeBoard?.columns?.map((column, colIndex) => (
                     <Column
                       key={column.id}
                       column={column}

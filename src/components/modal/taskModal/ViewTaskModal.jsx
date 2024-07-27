@@ -29,7 +29,7 @@ const ViewTaskModal = ({ handleClose }) => {
 
   const getFinishedSubTasks = () => {
     let finishedSubTasks = 0;
-    task.subTasks.forEach((subtask) => {
+    Array.isArray(task?.subTasks) && task?.subTasks?.forEach((subtask) => {
       if (subtask.isDone) {
         finishedSubTasks++;
       }
@@ -97,7 +97,7 @@ const ViewTaskModal = ({ handleClose }) => {
             Subtasks ({getFinishedSubTasks()} of {task.subTasks.length})
           </p>
           <div className="view-task__subtasks__list">
-            {task.subTasks?.map((subtask, index) => (
+            {Array.isArray(task?.subTasks) && task?.subTasks?.map((subtask, index) => (
               <Subtask
                 subtaskID={subtask.id}
                 boardID={task.boardID}

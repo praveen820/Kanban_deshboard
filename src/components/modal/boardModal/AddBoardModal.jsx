@@ -82,7 +82,7 @@ const AddBoardModal = () => {
           <div className="add-board__columns">
             <h3 className="modal-label">Board Columns</h3>
             <div className="add-board__columns__list">
-              {columns?.map((column, index) => (
+              {Array.isArray(columns) && columns?.map((column, index) => (
                 <div
                   className={`add-board__columns__list__item   ${
                     errorColumns.index.includes(index) && "modal-input__error"
@@ -105,7 +105,7 @@ const AddBoardModal = () => {
                   <button
                     onClick={() => {
                       const newColumns = [...columns];
-                      newColumns.splice(index, 1);
+                      Array.isArray(newColumns) && newColumns?.splice(index, 1);
                       setColumns(newColumns);
                     }}
                   >

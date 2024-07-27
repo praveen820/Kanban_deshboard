@@ -25,7 +25,7 @@ const Column = ({ column = {}, boardID = "", colIndex = 0 }) => {
             {column?.tasks?.length === 0 ? (
               <div className="column__empty f-column-empty"></div>
             ) : (
-              column?.tasks?.map((task, index) => (
+              Array.isArray(column?.tasks) && column?.tasks?.map((task, index) => (
                 <Task
                   key={task?.id}
                   task={task}

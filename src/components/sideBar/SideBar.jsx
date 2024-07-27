@@ -67,7 +67,7 @@ const SideBar = () => {
                     {...provided.droppableProps}
                     className="sidebar__board-list"
                   >
-                    {boards?.map((board, index) => (
+                    {Array.isArray(boards) && boards?.map((board, index) => (
                       <Draggable
                         key={board?.id}
                         draggableId={board?.id.toString()}

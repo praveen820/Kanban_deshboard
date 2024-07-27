@@ -11,7 +11,7 @@ const Task = ({ boardID, columnID, task, index }) => {
 
   const getFinishedSubTasks = (task) => {
     let finishedSubTasks = 0;
-    task.subTasks.forEach((subtask) => {
+    Array.isArray(task?.subTasks) && task?.subTasks?.forEach((subtask) => {
       if (subtask.isDone) {
         finishedSubTasks++;
       }

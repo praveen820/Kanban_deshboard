@@ -42,7 +42,7 @@ const HeaderModal = ({ handleClose }) => {
       >
         <h2>ALL BOARDS ({boards.length})</h2>
         <div className="header-modal__board-list">
-          {boards?.map((board, index) => (
+          {Array.isArray(boards) && boards?.map((board, index) => (
             <div
               key={index}
               onClick={() => handleBoardChange(board.id)}

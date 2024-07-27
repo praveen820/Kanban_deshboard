@@ -44,7 +44,7 @@ const DropdownStatus = ({ task }) => {
       </div>
       {openDropDown && (
         <div className="dropdown__options">
-          {board?.columns?.map((col, index) => (
+          {Array.isArray(board?.columns) && board?.columns?.map((col, index) => (
             <div
               key={index}
               className={`dropdown__option ${

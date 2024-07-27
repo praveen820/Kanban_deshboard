@@ -109,7 +109,7 @@ const EditBoardModal = () => {
         <div className="edit-board__columns">
           <h3 className="modal-label">Board Columns</h3>
           <div className="edit-board__columns-container">
-            {columns?.map((column, index) => (
+            {Array.isArray(columns) && columns?.map((column, index) => (
               <div className="edit-board__column" key={index}>
                 <input
                   className={`modal-input ${
@@ -120,7 +120,7 @@ const EditBoardModal = () => {
                   value={column?.name}
                   onChange={(e) => {
                     let newArray = [];
-                    columns.forEach((column, i) => {
+                    Array.isArray(columns) && columns?.forEach((column, i) => {
                       if (i === index) {
                         newArray.push({ ...column, name: e.target.value });
                       } else {
@@ -132,7 +132,7 @@ const EditBoardModal = () => {
                       setColumnErrorIndex([...columnErrorIndex, index]);
                     } else {
                       setColumnErrorIndex(
-                        columnErrorIndex.filter((i) => i !== index)
+                        Array.isArray(columnErrorIndex) && columnErrorIndex.filter((i) => i !== index)
                       );
                     }
                   }}
@@ -141,7 +141,7 @@ const EditBoardModal = () => {
                 <button
                   onClick={() => {
                     const newColumns = [...columns];
-                    newColumns.splice(index, 1);
+                    Array.isArray(newColumns) && newColumns?.splice(index, 1);
                     setColumns(newColumns);
                   }}
                 >
