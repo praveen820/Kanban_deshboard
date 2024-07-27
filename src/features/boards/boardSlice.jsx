@@ -198,7 +198,7 @@ export const boardsSlice = createSlice({
       // const intDestId = parseInt(destination.droppableId);
       task.columnID = destinationColumn.id;
       // Iterate through subtasks and change the columnID
-     Array.isArray( task.subTasks) &&  task.subTasks?.forEach((s) => (s.columnID = destinationColumn.id));
+     Array.isArray(task.subTasks) && task.subTasks?.forEach((s) => (s.columnID = destinationColumn.id));
     },
     changeTaskColumn: (state, action) => {
       const { boardID, oldColumnID, newColumnID, taskID } = action.payload;
@@ -209,7 +209,7 @@ export const boardsSlice = createSlice({
       oldColumn.tasks = Array.isArray(oldColumn?.tasks) && oldColumn?.tasks?.filter((t) => t.id !== taskID);
       task.columnID = newColumnID;
       // Iterate through subtasks and change the columnID
-     Array.isArray( task.subTasks) &&  task.subTasks?.forEach((s) => (s.columnID = newColumnID));
+     Array.isArray(task.subTasks) && task.subTasks?.forEach((s) => (s.columnID = newColumnID));
       newColumn.tasks?.push(task);
     },
 
