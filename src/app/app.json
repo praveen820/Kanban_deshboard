@@ -1,0 +1,10 @@
+  {"boards": {
+    "id": "newID",
+    "name": "boardName",
+    "columns": [
+      { "id": "column1", "name": "To Do", "tasks": [] },
+      { "id": "column2", "name": "In Progress", "tasks": [] },
+      { "id": "column3", "name": "Done", "tasks": [] }
+    ]
+  }
+  }
